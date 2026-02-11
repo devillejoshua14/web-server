@@ -21,12 +21,37 @@ Built as a deep-dive learning project to understand how web servers work under t
 # Install dependencies
 npm install
 
-# Run the server (in-memory mode, no DB required)
-node src/server.js
-
-# Run with PostgreSQL
+# Run with PostgreSQL (see setup below)
 cp .env.example .env        # edit with your DB credentials
 npm run migrate              # create tables
+npm start
+```
+
+### macOS Setup (Homebrew)
+
+```bash
+# Install PostgreSQL
+brew install postgresql@17
+brew services start postgresql@17
+
+# Create the database
+createdb webserver
+
+# Configure environment
+cp .env.example .env
+```
+
+Update `.env` with your macOS defaults — Homebrew uses your system username with no password:
+
+```
+DB_USER=<your-macos-username>
+DB_PASSWORD=
+```
+
+Then run migrations and start the server:
+
+```bash
+npm run migrate
 npm start
 ```
 
